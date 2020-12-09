@@ -14,7 +14,7 @@ public class ConexionBDD {
 	
 	public static String leerPropiedad(String nombre) {
 		Properties p = new Properties();
-		String path = "C:\\Users\\57300\\Documents\\Daniel\\CapacitacionCMC\\tallerSemillero-\\conexion.properties";
+		String path = "C:\\Users\\57300\\Documents\\Daniel\\CapacitacionCMC\\Repositorios\\tallerSemillero-\\conexion.properties";
 		try {
 			p.load(new FileReader(path));
 			return p.getProperty(nombre);
