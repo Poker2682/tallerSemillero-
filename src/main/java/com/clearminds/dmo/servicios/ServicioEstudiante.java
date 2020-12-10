@@ -2,9 +2,11 @@ package com.clearminds.dmo.servicios;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 import com.clearminds.dmo.dtos.Estudiante;
 import com.clearminds.dmo.excepciones.BDDException;
+import com.clearminds.dmo.utils.DateUtils;
 
 public class ServicioEstudiante extends ServicioBase {
 
@@ -14,9 +16,10 @@ public class ServicioEstudiante extends ServicioBase {
 		Statement stmt = null;
 		try {
 			stmt = getConexion().createStatement();
-
-			String sql = "INSERT INTO estudiantes (nombre, apellido, edad) " + "values('" + estudiante.getNombre() + "', '"
-					+ estudiante.getApellido() + "', '"+ estudiante.getEdad() +"')";
+			
+			String fechaActual = DateUtils.formatearFecha(new Date());
+			String sql = "INSERT INTO estudiantes (nombre, apellido, edad, fecha_modificacion) " + "values('" + estudiante.getNombre() + "', '"
+					+ estudiante.getApellido() + "', '"+ estudiante.getEdad() +"', '" + fechaActual + "')";
 
 			System.out.println("Script: " + sql);
 
@@ -34,9 +37,11 @@ public class ServicioEstudiante extends ServicioBase {
 		Statement stmt = null;
 		try {
 			stmt = getConexion().createStatement();
-
+			
+			String fechaActual = DateUtils.formatearFecha(new Date());
 			String sql = "UPDATE estudiantes SET nombre='"+ estudiante.getNombre() + "', "
-					+ "apellido='" + estudiante.getApellido() + "', edad=" + estudiante.getEdad() + " WHERE id = " + estudiante.getId();
+					+ "apellido='" + estudiante.getApellido() + "', edad=" + estudiante.getEdad() + ", "
+							+ "fecha_modificacion='"+ fechaActual +"' WHERE id = " + estudiante.getId();
 
 			System.out.println("Script: " + sql);
 
